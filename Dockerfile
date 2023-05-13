@@ -12,8 +12,17 @@ RUN ./configure --enable-optimizations
 RUN make -j $(nproc)
 RUN make install
 
+# Install the Nvidia drives
+RUN yum -y install bzip2 automake gcc-c++ pciutils elfutils-libelf-devel libglvnd-devel iptables firewalld vim bind-utils wge
+RUN yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+
+RUN yum clean expire-cache
+RUN yum -y install kernel-devel kernel-headers 
+
 # Swap the main version of Python from 2.7 to 3.8
-RUN pip3 install numpy torch tiktoken tqdm 
+RUN pip3 install torch 
+#--index-url https://download.pytorch.org/whl/cu100/
+RUN pip3 install numpy tiktoken tqdm
 # Pytorch needs a specific version of urllib3 otherwise there are ssl issues
 RUN pip3 install --upgrade urllib3==1.26.15
 
