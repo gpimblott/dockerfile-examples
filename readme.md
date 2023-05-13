@@ -1,7 +1,8 @@
 
 This repo is a placeholder to record how I can run nanogpt on a HPC using singularity and slurm
 
-# To run image with access to cuda GPUs use --gpus all flag
+# Running Cuda in docker
+To run image with access to cuda GPUs use --gpus all flag
 docker run --gpus all nvidia/cuda:10.2-cudnn7-devel nvidia-smi
 
 # Running pytorch in a container using slurm
