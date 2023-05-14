@@ -30,3 +30,17 @@ RUN pip3 install --upgrade urllib3==1.26.15
 WORKDIR /install
 RUN git clone https://github.com/karpathy/nanoGPT.git
 
+# Download and convert the test dataset that we will train on
+WORKDIR /install/nanoGPT
+RUN python3 data/shakespeare_char/prepare.py
+
+# Defaily command is to train the model
+CMD ["python3", "train.py", "config/train_shakespeare_char.py"]
+
+# Train the model - it should take ~ 3 mins on an A100 GPU
+# See documentation at https://github.com/karpathy/nanoGPT
+# RUN python3 train.py config/train_shakespeare_char.py
+#
+# Example of how to generate some sample data
+# RUNpython3 sample.py --out_dir=out-shakespeare-char
+
